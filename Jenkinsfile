@@ -12,7 +12,8 @@ pipeline {
         stage('Build and Deploy') {
             steps {
                 sh '''
-                    docker compose down
+                    docker rm -f portfolio-frontend portfolio-backend portfolio-mongodb || true
+
                     docker compose up -d --build
                 '''
             }
@@ -38,4 +39,4 @@ pipeline {
             echo 'Deployment failed. Check Jenkins console logs.'
         }
     }
-}  
+}
